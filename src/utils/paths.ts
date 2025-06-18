@@ -6,4 +6,5 @@ export enum Paths {
     CUSTOMERS = 'customers',
     BREAD = 'bread',
     DAIRY = 'dairy',
+    BACK = 'back'
 }
