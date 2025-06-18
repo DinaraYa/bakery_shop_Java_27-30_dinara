@@ -1,5 +1,5 @@
 import './App.css'
-import {Route, Routes} from "react-router-dom";
+import {Navigate, Route, Routes} from "react-router-dom";
 import {Paths} from "./utils/paths.ts";
 import Home from "./components/Home.tsx";
 import Customers from "./components/Customers.tsx";
@@ -9,6 +9,7 @@ import Bread from "./components/Bread.tsx";
 import Dairy from "./components/Dairy.tsx";
 import Navigator from "./components/navigation/Navigator.tsx";
 import {navItems, productsItems} from "./configurations/nav-config.ts";
+import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 
 
 function App() {
@@ -27,6 +28,8 @@ function App() {
                     <Route path={Paths.DAIRY} element={<Dairy/>}/>
                 </Route>
         </Route>
+            <Route path={'/error'} element={<ErrorPage/>}/>
+            <Route path={'*'} element={<Navigate to="/error" replace />}/>
         </Routes>
     )
 }
