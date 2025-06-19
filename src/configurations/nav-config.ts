@@ -6,7 +6,8 @@ export const navItems: RouteType[] = [
     {path: Paths.ORDERS, title: "Orders"},
     {path: Paths.CART, title: "Shopping Cart"},
     {path: Paths.CUSTOMERS, title: "Customers"},
-    {path: Paths.PRODUCTS, title: "Products"}
+    {path: Paths.PRODUCTS, title: "Products"},
+    {path: Paths.SIGNIN, title: "Signin"}
 ]
 
 export const productsItems: RouteType[] = [
