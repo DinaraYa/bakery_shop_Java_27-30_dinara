@@ -1,7 +1,6 @@
 import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
 import Divider from '@mui/material/Divider';
 import FormLabel from '@mui/material/FormLabel';
 import FormControl from '@mui/material/FormControl';
@@ -11,16 +10,8 @@ import Typography from '@mui/material/Typography';
 import Stack from '@mui/material/Stack';
 import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
-import ForgotPassword from './ForgotPassword.tsx';
-import AppTheme from './shared-theme/AppTheme.tsx';
-import ColorModeSelect from './shared-theme/ColorModeSelect.tsx';
 import { GoogleIcon } from './CustomIcons.tsx';
-
-
-type Props = {
-    disableCustomTheme?: boolean,
-    onSubmit: (data: {email: string, password: string}) => void
-}
+import type {LoginData} from "../../utils/shop-types.ts";
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -33,13 +24,7 @@ const Card = styled(MuiCard)(({ theme }) => ({
     margin: 'auto',
     [theme.breakpoints.up('sm')]: {
         maxWidth: '450px',
-    },
-    boxShadow:
-        'hsla(220, 30%, 5%, 0.05) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.05) 0px 15px 35px -5px',
-    ...theme.applyStyles('dark', {
-        boxShadow:
-            'hsla(220, 30%, 5%, 0.5) 0px 5px 15px 0px, hsla(220, 25%, 10%, 0.08) 0px 15px 35px -5px',
-    }),
+    }
 }));
 
 const SignInContainer = styled(Stack)(({ theme }) => ({
@@ -48,40 +33,28 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
     padding: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
         padding: theme.spacing(4),
-    },
-    '&::before': {
-        content: '""',
-        display: 'block',
-        position: 'absolute',
-        zIndex: -1,
-        inset: 0,
-        backgroundImage:
-            'radial-gradient(ellipse at 50% 50%, hsl(210, 100%, 97%), hsl(0, 0%, 100%))',
-        backgroundRepeat: 'no-repeat',
-        ...theme.applyStyles('dark', {
-            backgroundImage:
-                'radial-gradient(at 50% 50%, hsla(210, 100%, 16%, 0.5), hsl(220, 30%, 5%))',
-        }),
-    },
+    }
 }));
 
+type Props = {
+    submitFn: (loginData: LoginData) => void
+}
 
 
-export default function SignIn(props: Props) {
-    const {disableCustomTheme, onSubmit} = props;
+export default function SignInForm(props: Props) {
     const [emailError, setEmailError] = React.useState(false);
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
-    const [open, setOpen] = React.useState(false);
+    // const [open, setOpen] = React.useState(false);
 
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    // const handleClickOpen = () => {
+    //     setOpen(true);
+    // };
+    //
+    // const handleClose = () => {
+    //     setOpen(false);
+    // };
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -89,12 +62,10 @@ export default function SignIn(props: Props) {
             return;
         }
         const data = new FormData(event.currentTarget);
-        onSubmit({
+        props.submitFn({
             email: data.get('email') as string,
             password: data.get('password') as string
         });
-
-
     };
 
     const validateInputs = () => {
@@ -125,10 +96,7 @@ export default function SignIn(props: Props) {
     };
 
     return (
-        <AppTheme disableCustomTheme={disableCustomTheme}>
-            <CssBaseline enableColorScheme />
             <SignInContainer direction="column" justifyContent="space-between">
-                <ColorModeSelect sx={{ position: 'fixed', top: '1rem', right: '1rem' }} />
                 <Card variant="outlined">
                     <Typography
                         component="h1"
@@ -182,7 +150,10 @@ export default function SignIn(props: Props) {
                                 color={passwordError ? 'error' : 'primary'}
                             />
                         </FormControl>
-                        <ForgotPassword open={open} handleClose={handleClose} />
+                        {/*<FormControlLabel*/}
+                        {/*    control={<Checkbox value="remember" color="primary"/>}*/}
+                        {/*    label="Remember me"*/}
+                        {/*/>*/}
                         <Button
                             type="submit"
                             fullWidth
@@ -191,15 +162,6 @@ export default function SignIn(props: Props) {
                         >
                             Sign in
                         </Button>
-                        <Link
-                            component="button"
-                            type="button"
-                            onClick={handleClickOpen}
-                            variant="body2"
-                            sx={{ alignSelf: 'center' }}
-                        >
-                            Forgot your password?
-                        </Link>
                     </Box>
                     <Divider>or</Divider>
                     <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
@@ -214,7 +176,7 @@ export default function SignIn(props: Props) {
                         <Typography sx={{ textAlign: 'center' }}>
                             Don&apos;t have an account?{' '}
                             <Link
-                                href="/material-ui/getting-started/templates/sign-in/"
+                                href="#"
                                 variant="body2"
                                 sx={{ alignSelf: 'center' }}
                             >
@@ -224,6 +186,5 @@ export default function SignIn(props: Props) {
                     </Box>
                 </Card>
             </SignInContainer>
-        </AppTheme>
     );
 }

@@ -10,7 +10,7 @@ import Dairy from "./components/Dairy.tsx";
 import {navItems, productsItems} from "./configurations/nav-config.ts";
 import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
-import SignIn from "./components/servicePages/SignIn.tsx";
+import SignInForm from "./components/templates/SignInForm.tsx";
 
 
 function App() {
@@ -30,7 +30,7 @@ function App() {
                     <Route path={Paths.DAIRY} element={<Dairy/>}/>
                     <Route path={Paths.BACK} element={<Navigate to={Paths.HOME}/>}/>
                 </Route>
-                <Route path={Paths.SIGNIN} element={<SignIn onSubmit={object => console.log(JSON.stringify(object))}/>}  />
+                <Route path={Paths.SIGNIN} element={<SignInForm onSubmit={object => console.log(JSON.stringify(object))}/>}  />
             </Route>
             <Route path={'/error'} element={<ErrorPage/>}/>
             <Route path={'*'} element={<Navigate to="/error" replace/>}/>
