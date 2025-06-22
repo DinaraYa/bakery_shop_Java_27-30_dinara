@@ -12,6 +12,7 @@ import MuiCard from '@mui/material/Card';
 import { styled } from '@mui/material/styles';
 import { GoogleIcon } from './CustomIcons.tsx';
 import type {LoginData} from "../../utils/shop-types.ts";
+import {Checkbox, FormControlLabel} from "@mui/material";
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -150,10 +151,10 @@ export default function SignInForm(props: Props) {
                                 color={passwordError ? 'error' : 'primary'}
                             />
                         </FormControl>
-                        {/*<FormControlLabel*/}
-                        {/*    control={<Checkbox value="remember" color="primary"/>}*/}
-                        {/*    label="Remember me"*/}
-                        {/*/>*/}
+                        <FormControlLabel
+                            control={<Checkbox value="remember" color="primary"/>}
+                            label="Remember me"
+                        />
                         <Button
                             type="submit"
                             fullWidth
@@ -188,3 +189,4 @@ export default function SignInForm(props: Props) {
             </SignInContainer>
     );
 }
+

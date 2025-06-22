@@ -10,15 +10,33 @@ import Dairy from "./components/Dairy.tsx";
 import {navItems, productsItems} from "./configurations/nav-config.ts";
 import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
-import SignInForm from "./components/templates/SignInForm.tsx";
-
+import Login from "./components/servicePages/Login.tsx"
+import Logout from "./components/servicePages/Logout.tsx"
+import {Roles, type RouteType} from "./utils/shop-types.ts";
+import {useAppSelector} from "./redux/hooks.ts";
 
 function App() {
+    const {authUser} = useAppSelector(state => state.auth);
+    const predicate = (item: RouteType) => {
+        return (
+            item.role === Roles.ALL ||
+                item.role === Roles.USER && authUser ||
+                item.role === Roles.ADMIN && authUser && authUser.includes('admin') ||
+                item.role === Roles.NO_AUTH && !authUser
+        )
+    }
+
+
+
+    const getRoutes = () => {
+        return navItems.filter(item => predicate(item));
+    }
     return (
         <Routes>
             {/*<Route path={Paths.HOME} element={<Layout/>}>*/}
             {/*<Route path={Paths.HOME} element={<Navigator items={navItems}/>}>*/}
-            <Route path={Paths.HOME} element={<NavigatorDeskTop items={navItems}/>}>
+            {/*<Route path={Paths.HOME} element={<NavigatorDeskTop items={navItems}/>}>*/}
+            <Route path={Paths.HOME} element={<NavigatorDeskTop items={getRoutes()}/>}>
                 <Route index element={<Home/>}/>
                 <Route path={Paths.CUSTOMERS} element={<Customers/>}/>
                 <Route path={Paths.ORDERS} element={<Orders/>}/>
@@ -30,7 +48,8 @@ function App() {
                     <Route path={Paths.DAIRY} element={<Dairy/>}/>
                     <Route path={Paths.BACK} element={<Navigate to={Paths.HOME}/>}/>
                 </Route>
-                <Route path={Paths.SIGNIN} element={<SignInForm onSubmit={object => console.log(JSON.stringify(object))}/>}  />
+                <Route path={Paths.LOGIN} element={<Login/>}/>
+                <Route path={Paths.LOGOUT} element={<Logout/>}/>
             </Route>
             <Route path={'/error'} element={<ErrorPage/>}/>
             <Route path={'*'} element={<Navigate to="/error" replace/>}/>
