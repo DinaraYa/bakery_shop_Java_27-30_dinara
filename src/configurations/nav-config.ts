@@ -8,11 +8,12 @@ export const navItems: RouteType[] = [
     {path: Paths.CUSTOMERS, title: "Customers", role: Roles.ADMIN},
     {path: Paths.PRODUCTS, title: "Products", role: Roles.ALL},
     {path: Paths.LOGIN, title: "Login", role: Roles.NO_AUTH},
-    {path: Paths.LOGOUT, title: "Logout", role: Roles.USER}
+    {path: Paths.LOGOUT, title: "Logout", role: Roles.USER},
+    {path: Paths.REGISTER, title: "Register"}
 ]
 
 export const productsItems: RouteType[] = [
     {path: Paths.BREAD, title: "Bread"},
     {path: Paths.DAIRY, title: "Dairy"},
-    {path: Paths.BACK, title: "Back to main menu"},
+    {path: Paths.BACK, title: "Back to main menu"}
 ]

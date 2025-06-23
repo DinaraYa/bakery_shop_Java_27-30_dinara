@@ -14,20 +14,20 @@ import Login from "./components/servicePages/Login.tsx"
 import Logout from "./components/servicePages/Logout.tsx"
 import {Roles, type RouteType} from "./utils/shop-types.ts";
 import {useAppSelector} from "./redux/hooks.ts";
+import Register from "./components/servicePages/Register.tsx";
 
 function App() {
     const {authUser} = useAppSelector(state => state.auth);
     const predicate = (item: RouteType) => {
+       if (item.title === 'Logout' && authUser) return true;
+       const isUser = authUser.includes('admin');
         return (
             item.role === Roles.ALL ||
-                item.role === Roles.USER && authUser ||
-                item.role === Roles.ADMIN && authUser && authUser.includes('admin') ||
+                item.role === Roles.USER && authUser && !isUser ||
+                item.role === Roles.ADMIN && authUser && isUser ||
                 item.role === Roles.NO_AUTH && !authUser
         )
     }
-
-
-
     const getRoutes = () => {
         return navItems.filter(item => predicate(item));
     }
@@ -50,6 +50,7 @@ function App() {
                 </Route>
                 <Route path={Paths.LOGIN} element={<Login/>}/>
                 <Route path={Paths.LOGOUT} element={<Logout/>}/>
+                <Route path={Paths.REGISTER} element={<Register/>}/>
             </Route>
             <Route path={'/error'} element={<ErrorPage/>}/>
             <Route path={'*'} element={<Navigate to="/error" replace/>}/>

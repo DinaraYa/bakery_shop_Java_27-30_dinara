@@ -13,6 +13,7 @@ import { styled } from '@mui/material/styles';
 import { GoogleIcon } from './CustomIcons.tsx';
 import type {LoginData} from "../../utils/shop-types.ts";
 import {Checkbox, FormControlLabel} from "@mui/material";
+import {useNavigate} from "react-router-dom";
 
 
 const Card = styled(MuiCard)(({ theme }) => ({
@@ -33,7 +34,7 @@ const SignInContainer = styled(Stack)(({ theme }) => ({
     minHeight: '100%',
     padding: theme.spacing(2),
     [theme.breakpoints.up('sm')]: {
-        padding: theme.spacing(4),
+        padding: theme.spacing(4)
     }
 }));
 
@@ -47,6 +48,7 @@ export default function SignInForm(props: Props) {
     const [emailErrorMessage, setEmailErrorMessage] = React.useState('');
     const [passwordError, setPasswordError] = React.useState(false);
     const [passwordErrorMessage, setPasswordErrorMessage] = React.useState('');
+    const navigate = useNavigate();
     // const [open, setOpen] = React.useState(false);
 
     // const handleClickOpen = () => {
@@ -56,6 +58,9 @@ export default function SignInForm(props: Props) {
     // const handleClose = () => {
     //     setOpen(false);
     // };
+    const handleClick = () => {
+        navigate('/register')
+    }
 
     const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
@@ -177,6 +182,7 @@ export default function SignInForm(props: Props) {
                         <Typography sx={{ textAlign: 'center' }}>
                             Don&apos;t have an account?{' '}
                             <Link
+                                onClick={handleClick}
                                 href="#"
                                 variant="body2"
                                 sx={{ alignSelf: 'center' }}
