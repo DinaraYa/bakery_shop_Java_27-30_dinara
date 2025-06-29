@@ -39,7 +39,7 @@ const SignUpContainer = styled(Stack)(({ theme }) => ({
 }));
 
 type Props = {
-  submitRegister: (registerData: RegisterData) => void;
+  submitFn: (data: RegisterData) => void;
 }
 
 export default function SignUpForm(props: Props) {
@@ -95,8 +95,8 @@ export default function SignUpForm(props: Props) {
       return;
     }
     const data = new FormData(event.currentTarget);
-    props.submitRegister({
-      name: data.get('name') as string,
+    props.submitFn({
+      firstName: data.get('firstName') as string,
       lastName: data.get('lastName') as string,
       email: data.get('email') as string,
       password: data.get('password') as string,
@@ -119,13 +119,13 @@ export default function SignUpForm(props: Props) {
             sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
           >
             <FormControl>
-              <FormLabel htmlFor="name">Name</FormLabel>
+              <FormLabel htmlFor="name">First name</FormLabel>
               <TextField
-                autoComplete="name"
-                name="name"
+                autoComplete="firstName"
+                name="firstName"
                 required
                 fullWidth
-                id="name"
+                id="firstName"
                 placeholder="Jon"
                 error={nameError}
                 helperText={nameErrorMessage}

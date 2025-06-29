@@ -18,8 +18,17 @@ export type LoginData = {
 }
 
 export type RegisterData = {
-    name: string,
-    lastName: string,
+    firstName: string | "",
+    lastName: string | "",
     email: string,
     password: string
+}
+
+export type ProductType = {
+    id?: string,
+    title: string,
+    category: string,
+    unit: string,
+    cost: number,
+    image: string
 }

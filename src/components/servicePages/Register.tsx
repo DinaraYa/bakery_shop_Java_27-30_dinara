@@ -1,17 +1,33 @@
-import {useAppDispatch} from "../../redux/hooks.ts";
+// import {useAppDispatch} from "../../redux/hooks.ts";
 import type {RegisterData} from "../../utils/shop-types.ts";
-import {registerAction} from "../../redux/slices/registerSlice.ts";
 import SignUpForm from "../templates/SignUpForm.tsx";
+import {registerWithEmailAndPassword} from "../../firebase/firebaseAuthService.ts";
+import {useNavigate} from "react-router-dom";
 
 
 const Register = () => {
-    const dispatch = useAppDispatch();
-    const submitRegister = (registerData: RegisterData) => {
-        dispatch(registerAction(registerData));
+    const navigate = useNavigate();
+    // const submitRegister = (data: RegisterData) => {
+    //     console.log(JSON.stringify(data));
+    // }
+    const signUpWithEmail  = async (data: RegisterData) => {
+        const userEmailPath: RegisterData = {
+            firstName: data.firstName,
+            lastName: data.lastName,
+            email: data.email,
+            password: data.password
+        }
+        try {
+           await registerWithEmailAndPassword(userEmailPath);
+           navigate("/login");
+        } catch (e) {
+            console.log(e)
+        }
     }
+
     return (
         <div>
-            <SignUpForm submitRegister={submitRegister}/>
+            <SignUpForm submitFn={signUpWithEmail}/>
         </div>
     );
 };
