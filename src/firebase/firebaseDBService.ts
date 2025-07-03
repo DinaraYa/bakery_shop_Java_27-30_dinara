@@ -24,7 +24,7 @@ export const addCategory = async (category: Category) => {
 export const removeProduct = async (id: string) => {
     const ref = doc(prodColl, id);
     const removed = await getDoc(ref);
-    console.log(removed.data()); // ToDo
+    // console.log(removed.data()); // ToDo
     await deleteDoc(ref);
     return removed;
 }
@@ -32,7 +32,7 @@ export const removeProduct = async (id: string) => {
 export const removeCategory = async (name: string) => {
     const ref = doc(categoryColl, name);
     const removed = await getDoc(ref);
-    console.log(removed.data()); // ToDo
+    // console.log(removed.data()); // ToDo
     await deleteDoc(ref);
     return removed;
 }
