@@ -4,17 +4,17 @@ import {ProductType} from "../../utils/shop-types.ts";
 
 
 type productsState ={
-    currProd: ProductType[]
+    currProds: ProductType[]
 }
 
-const initialState: productsState ={currProd: []}
+const initialState: productsState ={currProds: []}
 
 const productSlice = createSlice({
     name: 'products',
     initialState,
     reducers: {
         prodsUpd: (state, action) => {
-            state.currProd = action.payload;
+            state.currProds = action.payload;
         }
     }
 })
