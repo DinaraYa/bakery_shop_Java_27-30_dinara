@@ -15,46 +15,47 @@ import Logout from "./components/servicePages/Logout.tsx"
 import {Roles, type RouteType} from "./utils/shop-types.ts";
 import {useAppSelector} from "./redux/hooks.ts";
 import Register from "./components/servicePages/Register.tsx";
-import AppBar from "./components/servicePages/AppBar.tsx";
+
+
 
 function App() {
     const {authUser} = useAppSelector(state => state.auth);
     const predicate = (item: RouteType) => {
         return (
             item.role === Roles.ALL ||
-                item.role === Roles.USER && authUser ||
-                item.role === Roles.ADMIN && authUser && authUser.includes('admin')||
-                item.role === Roles.NO_AUTH && !authUser
+            item.role === Roles.USER && authUser ||
+            item.role === Roles.ADMIN && authUser && authUser.includes('admin') ||
+            item.role === Roles.NO_AUTH && !authUser
         )
     }
     const getRoutes = () => {
         return navItems.filter(item => predicate(item));
     }
     return (
-        <Routes>
-            {/*<Route path={Paths.HOME} element={<Layout/>}>*/}
-            {/*<Route path={Paths.HOME} element={<Navigator items={navItems}/>}>*/}
-            {/*<Route path={Paths.HOME} element={<NavigatorDeskTop items={navItems}/>}>*/}
-            <Route path={Paths.HOME} element={<NavigatorDeskTop items={getRoutes()}/>}>
-                <Route index element={<Home/>}/>
-                <Route path={Paths.CUSTOMERS} element={<Customers/>}/>
-                <Route path={Paths.ORDERS} element={<Orders/>}/>
-                <Route path={Paths.CART} element={<ShoppingCart/>}/>
-                {/*<Route path={Paths.PRODUCTS} element={<Products/>}/>*/}
-                {/*<Route path={Paths.PRODUCTS} element={<ProductLayout/>}>*/}
-                <Route path={Paths.PRODUCTS} element={<NavigatorDeskTop items={productsItems}/>}>
-                    <Route path={Paths.BREAD} element={<Bread/>}/>
-                    <Route path={Paths.DAIRY} element={<Dairy/>}/>
-                    <Route path={Paths.BACK} element={<Navigate to={Paths.HOME}/>}/>
+            <Routes>
+                {/*<Route path={Paths.HOME} element={<Layout/>}>*/}
+                {/*<Route path={Paths.HOME} element={<Navigator items={navItems}/>}>*/}
+                {/*<Route path={Paths.HOME} element={<NavigatorDeskTop items={navItems}/>}>*/}
+                <Route path={Paths.HOME} element={<NavigatorDeskTop items={getRoutes()}/>}>
+                    <Route index element={<Home/>}/>
+                    <Route path={Paths.CUSTOMERS} element={<Customers/>}/>
+                    <Route path={Paths.ORDERS} element={<Orders/>}/>
+                    <Route path={Paths.CART} element={<ShoppingCart/>}/>
+                    {/*<Route path={Paths.PRODUCTS} element={<Products/>}/>*/}
+                    {/*<Route path={Paths.PRODUCTS} element={<ProductLayout/>}>*/}
+                    <Route path={Paths.PRODUCTS} element={<NavigatorDeskTop items={productsItems}/>}>
+                        <Route path={Paths.BREAD} element={<Bread/>}/>
+                        <Route path={Paths.DAIRY} element={<Dairy/>}/>
+                        <Route path={Paths.BACK} element={<Navigate to={Paths.HOME}/>}/>
+                    </Route>
+                    <Route path={Paths.LOGIN} element={<Login/>}/>
+                    <Route path={Paths.LOGOUT} element={<Logout/>}/>
                 </Route>
-                <Route path={Paths.LOGIN} element={<Login/>}/>
-                <Route path={Paths.LOGOUT} element={<Logout/>}/>
-            </Route>
-            <Route path={Paths.AUTHENTICATION} element={<AppBar/>}/>
-            <Route path={Paths.REGISTER} element={<Register/>}/>
-            <Route path={'/error'} element={<ErrorPage/>}/>
-            <Route path={'*'} element={<Navigate to="/error" replace/>}/>
-        </Routes>
+                <Route path={Paths.REGISTER} element={<Register/>}/>
+                <Route path={'/error'} element={<ErrorPage/>}/>
+                <Route path={'*'} element={<Navigate to="/error" replace/>}/>
+            </Routes>
+
     )
 }
 

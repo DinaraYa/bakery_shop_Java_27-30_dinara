@@ -10,7 +10,6 @@ export const navItems: RouteType[] = [
     {path: Paths.LOGIN, title: "Login", role: Roles.NO_AUTH},
     {path: Paths.LOGOUT, title: "Logout", role: Roles.USER},
     {path: Paths.REGISTER, title: "Register"},
-    {path: Paths.AUTHENTICATION, title: "Authentication", role: Roles.USER}
 ]
 
 export const productsItems: RouteType[] = [

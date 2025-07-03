@@ -119,31 +119,17 @@ export default function SignUpForm(props: Props) {
             sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}
           >
             <FormControl>
-              <FormLabel htmlFor="name">First name</FormLabel>
+              <FormLabel htmlFor="name">Full name</FormLabel>
               <TextField
-                autoComplete="firstName"
-                name="firstName"
+                autoComplete="name"
+                name="name"
                 required
                 fullWidth
-                id="firstName"
+                id="name"
                 placeholder="Jon"
                 error={nameError}
                 helperText={nameErrorMessage}
                 color={nameError ? 'error' : 'primary'}
-              />
-            </FormControl>
-            <FormControl>
-              <FormLabel htmlFor="name">Last name</FormLabel>
-              <TextField
-                  autoComplete="lastName"
-                  name="lastName"
-                  required
-                  fullWidth
-                  id="lastName"
-                  placeholder="Snow"
-                  error={nameError}
-                  helperText={nameErrorMessage}
-                  color={nameError ? 'error' : 'primary'}
               />
             </FormControl>
             <FormControl>

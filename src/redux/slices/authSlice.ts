@@ -1,11 +1,13 @@
 import {createSlice} from "@reduxjs/toolkit";
 
 type AuthState = {
-    authUser: string
+    authUser: string | null,
+    displayName: string | null
 }
 
 const initialState: AuthState = {
-    authUser: "",
+    authUser: null,
+    displayName: null
 }
 
 const authSlice = createSlice({

@@ -1,9 +1,10 @@
 
-import {signOut, signInWithEmailAndPassword,
+import {updateProfile, signOut, signInWithEmailAndPassword,
     signInWithPopup, GoogleAuthProvider,
     createUserWithEmailAndPassword } from 'firebase/auth';
 import type {LoginData, RegisterData} from "../utils/shop-types.ts";
 import {auth} from "../configurations/firebase-config.ts";
+
 
 
 const logInWithEmail = async (data: LoginData) => {
@@ -30,5 +31,11 @@ export const registerWithEmailAndPassword = async (data: LoginData) => {
 }
 
 export const exit = async () => {
-    signOut(auth)
+    signOut(auth);
+}
+
+export const updateUserProfile = async (data: RegisterData) => {
+    const user = auth.currentUser;
+    if (user)
+        await updateProfile(user, {displayName: data.firstName})
 }
