@@ -12,14 +12,26 @@ import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
 import Login from "./components/servicePages/Login.tsx"
 import Logout from "./components/servicePages/Logout.tsx"
-import {Roles, type RouteType} from "./utils/shop-types.ts";
-import {useAppSelector} from "./redux/hooks.ts";
+import {ProductType, Roles, type RouteType} from "./utils/shop-types.ts";
+import {useAppDispatch, useAppSelector} from "./redux/hooks.ts";
 import Register from "./components/servicePages/Register.tsx";
+import {getProducts} from "./firebase/firebaseDBService.ts";
+import {useEffect} from "react";
+import {prodsUpd} from "./redux/slices/productSlice.ts";
 
 
 
 function App() {
     const {authUser} = useAppSelector(state => state.auth);
+    const dispatch = useAppDispatch();
+     useEffect(()=> {
+         const subscription = getProducts().subscribe({
+             next: (prods: ProductType[]) => {
+                 dispatch(prodsUpd(prods))
+             }
+         })
+         return () => {subscription.unsubscribe()};
+     },[])
     const predicate = (item: RouteType) => {
         return (
             item.role === Roles.ALL ||
