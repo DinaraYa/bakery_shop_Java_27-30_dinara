@@ -1,4 +1,6 @@
 import {div, echo, getRandomNumber, reverseArray} from "../src/utils/tools";
+import {isCategoryExists} from "../src/firebase/firebaseDBService";
+import { getApps, deleteApp } from 'firebase/app';
 
 
 describe('BakeryShop.tools', () => {
@@ -37,10 +39,13 @@ describe('BakeryShop.tools', () => {
 })
 
 
-// describe('BakeryShop.dbService', () => {
-//     test("isCathegoryExists", () => {
-//         expect(isCategoryExists('bread')).resolves.toBeTruthy();
-//         expect(isCategoryExists('milk')).resolves.toBeTruthy();
-//     })
-// })
+describe('BakeryShop.dbService', () => {
+    afterAll(async () => {
+        await Promise.all(getApps().map(deleteApp))
+    })
+    test("isCategoryExists", () => {
+        expect(isCategoryExists('bread')).resolves.toBeTruthy();
+        expect(isCategoryExists('milk')).resolves.toBeTruthy();
+    })
+})
 
