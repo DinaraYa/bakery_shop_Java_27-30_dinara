@@ -4,6 +4,7 @@ import {Avatar, Box} from "@mui/material";
 
 
 
+
 const BreadProductAdmin = () => {
     const {currProds} = useAppSelector(state => state.products);
     const rows = currProds;

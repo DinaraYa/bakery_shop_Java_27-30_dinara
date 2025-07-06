@@ -1,4 +1,12 @@
 import SvgIcon from '@mui/material/SvgIcon';
+import {Avatar} from "@mui/material";
+
+
+
+export const RemoveIcon = () => {
+    return <Avatar src={'/images/trash.png'} style={{}}/>;
+}
+
 
 export function SitemarkIcon() {
     return (
