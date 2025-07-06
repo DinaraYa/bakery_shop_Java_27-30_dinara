@@ -22,10 +22,9 @@ const ShoppingCart = () => {
     const columns: GridColDef<(typeof rows)[number]>[]=[
         { field: 'id', headerName: 'ID', width: 90, flex: 0.3 },
         { field: 'title', headerName: 'Product Name', width: 150, flex: 1 },
-        // { field: 'category', headerName: 'Category', width: 90, flex: 0.4 },
         { field: 'unit', headerName: 'Unit', width: 90, flex: 0.4 },
         { field: 'cost', headerName: 'Price in ILS', width: 90, flex: 0.4 },
-        { field: 'count', headerName: 'Quantity', width: 90, flex: 0.4, editable: true},
+        { field: 'count', headerName: 'Quantity', width: 90, flex: 0.4, type: "number", editable: true},
         { field: 'amount', headerName: 'Amount in ILS', width: 90, flex: 0.4 },
         { field: 'image', width: 200, flex: 0.5, renderCell: (params) => {
                 return (

@@ -13,7 +13,7 @@ const BreadProductAdmin = () => {
         { field: 'title', headerName: 'Product Name', width: 150, flex: 1 },
         { field: 'category', headerName: 'Category', width: 90, flex: 0.4 },
         { field: 'unit', headerName: 'Unit', width: 90, flex: 0.4 },
-        { field: 'cost', headerName: 'Price in ILS', width: 90, flex: 0.4 },
+        { field: 'cost', headerName: 'Price in ILS', width: 90, flex: 0.4, type: "number", editable: true },
         { field: 'image', width: 200, flex: 0.5, renderCell: (params) => {
             return (
                 <Avatar src={'/images/'+ params.value}/>
