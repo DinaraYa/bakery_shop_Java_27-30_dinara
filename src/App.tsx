@@ -12,12 +12,14 @@ import ErrorPage from "./components/servicePages/ErrorPage.tsx";
 import NavigatorDeskTop from "./components/navigation/NavigatorDeskTop.tsx";
 import Login from "./components/servicePages/Login.tsx"
 import Logout from "./components/servicePages/Logout.tsx"
-import {ProductType, Roles, type RouteType} from "./utils/shop-types.ts";
+import {ProductType, Roles, type RouteType, ShopCartProdType} from "./utils/shop-types.ts";
 import {useAppDispatch, useAppSelector} from "./redux/hooks.ts";
 import Register from "./components/servicePages/Register.tsx";
 import {getProducts} from "./firebase/firebaseDBService.ts";
 import {useEffect} from "react";
 import {prodsUpd} from "./redux/slices/productSlice.ts";
+import {resetCart, setCart} from "./redux/slices/cartSlice.ts";
+import {getCartProducts} from "./firebase/firebaseCartService.ts";
 
 
 
@@ -40,6 +42,18 @@ function App() {
             item.role === Roles.NO_AUTH && !authUser
         )
     }
+    useEffect(() => {
+        if(!authUser || authUser.includes('admin'))
+            dispatch(resetCart());
+        else{
+            const subscribtion = getCartProducts(`${authUser}_collection`);
+            subscribtion.subscribe({
+                next: (cartProducts: ShopCartProdType[])=> dispatch(setCart(cartProducts))
+            })
+        }
+
+    }, [authUser]);
+
     const getRoutes = () => {
         return navItems.filter(item => predicate(item));
     }
