@@ -23,30 +23,30 @@ const BreadProductsUser = () => {
         <Grid container>
             {currProds.map((item: ProductType) =>
                 <Grid key={item.id!} size={{xs: 12, sm: 6, md: 3}}>
-                    <Card sx={{ maxWidth: 345 }}>
+                    <Card sx={{ maxWidth: 345, marginBottom: "30px", marginRight: "10px" }}>
                         <CardMedia
                             sx={{ height: 140 }}
                             image={"/images/"+item.image}
                             title="green iguana"
                         />
-                        <CardContent>
-                            <Typography gutterBottom variant="h5" component="div">
+                        <CardContent sx={{blockSize: "130px"}}>
+                            <Typography gutterBottom variant="h5" component="div" sx={{ alignItems: "center", marginBottom: "10px" }}>
                                 {item.title}
                             </Typography>
-                            <Typography variant="body2" sx={{ color: 'text.secondary' }}>
+                            <Typography variant="body2" sx={{ color: 'text.secondary'}}>
                                 Lizards are a widespread group of squamate reptiles, with over 6,000
                                 species, ranging across all continents except Antarctica
                             </Typography>
                         </CardContent>
-                        <CardActions>
-                            <Button size="small"
+                        <CardActions sx={{display: "flex", justifyContent: "space-evenly"}}>
+                            <Button size="large" variant="contained" color="info"
                             onClick={async ()=> {
                                 if (!authUser) navigate("/login")
                                 await addProductUnitToCart(`${authUser!}_collection`, item.id!)
                             }}
                             >+</Button>
-                            <Typography>{getCount(item)}</Typography>
-                            <Button size="small"
+                            <Typography sx={{ fontSize: "25px"}}>{getCount(item)}</Typography>
+                            <Button size="large" variant="contained" color="info"
                             onClick={async () => {
                                 if (!authUser) navigate("/register")
                                 await removeProductUnitFromCart(`${authUser!}_collection`, item.id!)

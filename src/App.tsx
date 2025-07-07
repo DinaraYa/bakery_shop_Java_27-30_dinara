@@ -23,6 +23,7 @@ import {getCartProducts} from "./firebase/firebaseCartService.ts";
 
 
 
+
 function App() {
     const {authUser} = useAppSelector(state => state.auth);
     const dispatch = useAppDispatch();
