@@ -5,6 +5,7 @@ import Typography from "@mui/material/Typography";
 import Button from "@mui/material/Button";
 import {useNavigate} from "react-router-dom";
 import {addProductUnitToCart, removeProductUnitFromCart} from "../../firebase/firebaseCartService.ts";
+import {getImageURI} from "../../utils/tools.ts";
 
 
 
@@ -26,7 +27,7 @@ const BreadProductsUser = () => {
                     <Card sx={{ maxWidth: 345, marginBottom: "30px", marginRight: "10px" }}>
                         <CardMedia
                             sx={{ height: 140 }}
-                            image={"/images/"+item.image}
+                            image={getImageURI(item.image)}
                             title="green iguana"
                         />
                         <CardContent sx={{blockSize: "130px"}}>
